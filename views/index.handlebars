@@ -1,0 +1,42 @@
+<h1>To-Do List:</h1>
+
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="col s6">
+        {{#each checklist}}
+          {{#unless this.completed}}
+            <div>
+              <form action="/checklist/{{this.id}}?_method=PUT" method="POST">
+                <button type="submit" class='itemPending'> {{this.task_name}}</button>
+              </form>
+            </div>
+          {{/unless}}
+        {{/each}}
+      </div>
+
+      <div class="col s6">
+        {{#each checklist}}
+          {{#if this.completed}}
+            <div class='itemCompleted'>
+              <div>
+                {{this.task_name}}
+              </div>
+            </div>
+          {{/if}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</main>
+
+<h2>Add an Item</h2>
+
+<div class="row">
+  <div class="col s12">
+    <form action="/checklist" method="POST">
+      <input type="text" id="name" name="task_name" placeholder="Enter Item Here">
+      <button type="submit" class="addItemButton">Add Item</button>
+    </form>
+  </div>
+</div>
